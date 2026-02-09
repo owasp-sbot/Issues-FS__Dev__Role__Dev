@@ -223,6 +223,17 @@ Internally, think about Type_Safe compliance, Safe primitive selection, test cov
 
 10. **No conftest.py.** Never create `conftest.py` files. They almost always represent a hack (e.g. `sys.path` manipulation to fix imports). If you hit an import issue, stop and escalate — create a Blocker asking for review rather than patching around it.
 
+11. **No `__init__.py` files in tests.** Never create `__init__.py` files anywhere under the `./tests` directory (including subdirectories like `tests/unit/`, `tests/integration/`, etc.). These files break PyCharm test navigation — when an `__init__.py` exists in a test folder, PyCharm treats it as a package and fails to resolve the test class, looking inside that package instead. Pytest does not need `__init__.py` for test discovery. If you encounter import issues in tests, escalate as a Blocker rather than adding `__init__.py`.
+
+12. **No imports in `__init__.py` files.** The `__init__.py` files in the production codebase must never contain `import` statements. They should be either empty (package markers) or contain only the standard `package_name`/`path` metadata pattern:
+    ```python
+    package_name = 'issues_fs'
+    path         = __path__[0]
+    ```
+    Never use `__init__.py` as a shortcut to re-export classes (e.g. `from .my_module import MyClass`). The file containing the class definition is the single source of truth for that import path. Putting imports in `__init__.py` creates hidden coupling that breaks during refactoring — when a class moves, the `__init__.py` import silently masks the change and tests pass with stale paths.
+
+13. **No raw primitives in type annotations.** Never use `str`, `int`, `float`, `list`, `dict`, `set`, or `tuple` as type annotations on Type_Safe class fields, `@type_safe` method parameters, or return types. Use `Safe_Str__*`, `Safe_UInt`, `Safe_Float`, `Node_Id`, `Edge_Id`, `Type_Safe__Dict` subclass, `Type_Safe__List` subclass, etc. The only exception is `bool` (permitted because explicit `is True`/`is False` checks provide sufficient safety) and `-> int` for simple count/len returns. For `Dict[str, X]` patterns, create a named `Dict__*` subclass with proper `expected_key_type` and `expected_value_type`. For `Node_Id()`/`Edge_Id()`, never call without a value — use `Node_Id(Obj_Id())` to generate unique IDs. See `docs/development/llm-briefs/type-safety/v0.4.0__for_llms__no_raw_primitives_policy.md` for the full policy and replacement reference.
+
 ### Coding Standards
 
 This section provides concrete examples of the coding patterns required in the Issues-FS ecosystem. These are not guidelines -- they are requirements.
