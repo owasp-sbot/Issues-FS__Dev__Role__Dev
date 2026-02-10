@@ -1,0 +1,15 @@
+{
+  "node_id": "3040037d",
+  "node_type": "task",
+  "node_index": 3,
+  "label": "Task-3",
+  "title": "Implement Jekyll news site per ADR-001 at news.issuesFS.ai",
+  "description": "Implement the Journalist news site per ADR-001 (Accepted). Site: news.issuesFS.ai. Repo: Issues-FS__Dev__Role__Journalist. Deliverables: (1) _config.yml with Jekyll collections pointing at publications/, minima theme, jekyll-feed plugin, permalink /{category}/{slug}/. (2) index.md landing page listing recent publications across all collections. (3) Per-category feed templates (articles/feed.xml, briefs/feed.xml, etc). (4) YAML front matter added to all existing publications. (5) slug field in front matter for files with date-prefix filenames. (6) CNAME file with news.issuesFS.ai. See ADR-001 at: roles/Issues-FS__Dev__Role__Architect/docs/adr__001__github-pages-news-site.md for full spec.",
+  "status": "backlog",
+  "created_at": 1770765386352,
+  "updated_at": 1770765386352,
+  "created_by": "9d672c79",
+  "tags": [],
+  "links": [],
+  "properties": {}
+}
