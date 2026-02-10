@@ -1,0 +1,15 @@
+{
+  "node_id": "9ec055b7",
+  "node_type": "task",
+  "node_index": 1,
+  "label": "Task-1",
+  "title": "Implement Issues-FS News Site after Architect ADR",
+  "description": "Once the Architect produces the ADR for the GitHub Pages news site, implement: Jekyll/Hugo config, layout templates, GitHub Actions deploy workflow, content migration (add YAML front matter to existing publications), GitHub Pages setup, and testing. See Journalist handoff: publications/feature-requests/2026-02-10__news-site-implementation-handoff.md in the Journalist role repo. Blocked on Architect ADR.",
+  "status": "backlog",
+  "created_at": 1770732316863,
+  "updated_at": 1770732316863,
+  "created_by": "c5913f8b",
+  "tags": [],
+  "links": [],
+  "properties": {}
+}
